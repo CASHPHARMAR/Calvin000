@@ -54,12 +54,12 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname),
   build: {
-    // On Vercel (VERCEL=1), output to the repo root's dist/ so that
-    // outputDirectory: "dist" in vercel.json resolves correctly.
-    // In Replit and local dev, keep the nested dist/public/ path that
-    // the Replit artifact config expects.
+    // Vercel resolves outputDirectory relative to where the build script runs
+    // (artifacts/portfolio/), not the repo root. So "dist" in vercel.json
+    // means artifacts/portfolio/dist — output there on Vercel.
+    // In Replit, keep dist/public/ which the artifact config serves from.
     outDir: process.env.VERCEL
-      ? path.resolve(import.meta.dirname, '..', '..', 'dist')
+      ? path.resolve(import.meta.dirname, 'dist')
       : path.resolve(import.meta.dirname, 'dist', 'public'),
     emptyOutDir: true,
   },
