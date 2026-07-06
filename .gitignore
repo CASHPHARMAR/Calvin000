@@ -44,8 +44,11 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
-# Vercel
-.vercel/output/
+# Netlify
+.netlify/
+
+# Vercel (no longer used — prevent accidental reintroduction)
+.vercel/
 
 # Replit
 .cache/

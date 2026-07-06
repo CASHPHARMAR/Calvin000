@@ -1,0 +1,28 @@
+[build]
+  command = "pnpm --filter @workspace/portfolio run build"
+  publish = "artifacts/portfolio/dist/public"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA routing — all paths fall back to index.html so client-side
+# routing (wouter) handles them without a 404 on refresh.
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# Long-term cache for hashed assets (JS, CSS, images)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Security headers for all responses
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection       = "1; mode=block"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
