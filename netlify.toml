@@ -3,7 +3,10 @@
   publish = "artifacts/portfolio/dist/public"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION    = "20"
+  # pnpm-lock.yaml is format 9.0 — requires pnpm 9+ to read.
+  # Netlify defaults to an older pnpm; pin to 10 to match the lockfile.
+  PNPM_VERSION    = "10"
 
 # SPA routing — all paths fall back to index.html so client-side
 # routing (wouter) handles them without a 404 on refresh.
